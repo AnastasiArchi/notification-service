@@ -14,14 +14,31 @@ public class EmailNotificationService {
     }
 
     public void sendUserEvent(String email, String operation) {
-        SimpleMailMessage message = new SimpleMailMessage();
+        String subject;
+        String text;
 
+        switch (operation) {
+            case "CREATE" -> {
+                subject = "Аккаунт успешно создан";
+                text = "Здравствуйте! Ваш аккаунт на сайте ваш сайт был успешно создан.";
+            }
+            case "DELETE" -> {
+                subject = "Аккаунт удалён";
+                text = "Здравствуйте! Ваш аккаунт был удалён.";
+            }
+            case "UPDATE" -> {
+                // По текущему ТЗ для обновления email отправлять не нужно.
+                return;
+            }
+            default -> throw new IllegalArgumentException(
+                    "Неизвестная операция: " + operation
+            );
+        }
+
+        SimpleMailMessage message = new SimpleMailMessage();
         message.setTo(email);
-        message.setSubject("Уведомление: " + operation);
-        message.setText(
-                "В системе произошло событие: " + operation
-                        + "\nEmail пользователя: " + email
-        );
+        message.setSubject(subject);
+        message.setText(text);
 
         mailSender.send(message);
     }
