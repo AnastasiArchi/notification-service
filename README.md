@@ -226,3 +226,8 @@ Kafka и Mailpit должны быть запущены отдельно от п
 ```
 
 Тесты должны завершиться успешно до публикации изменений в репозитории.
+
+## Связанные репозитории
+
+- [user-service (ветка homework-5)](https://github.com/AnastasiArchi/user-service/tree/homework-5) — микросервис для создания и удаления пользователей, публикующий соответствующие события в Kafka.
+- [notification-service](https://github.com/AnastasiArchi/notification-service) — микросервис, обрабатывающий события Kafka и отправляющий email-уведомления, а также предоставляющий REST API для отправки писем.
